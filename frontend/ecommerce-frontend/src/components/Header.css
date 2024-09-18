@@ -1,0 +1,77 @@
+/* Header.css */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+.search-bar-form {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.search-bar {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    width: 200px;
+}
+
+.search-bar-form button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 12px;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar-form button:hover {
+    background-color: #0056b3;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    padding: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #007BFF;
+}
+
+.cart-info {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.cart-count {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    margin-left: 10px;
+}
+
+.cart-info span:last-child {
+    margin-left: 10px;
+    font-weight: bold;
+}

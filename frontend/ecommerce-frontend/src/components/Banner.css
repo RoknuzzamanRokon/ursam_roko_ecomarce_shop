@@ -1,0 +1,14 @@
+.banner {
+    background-color: blue;
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+.shop-now {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
