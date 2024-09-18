@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "./ProductDetail.css"; // Make sure to import the CSS file
+import "./ProductDetail.css"; // Ensure the CSS is imported
 
 function ProductDetail() {
   const { id } = useParams();
@@ -22,6 +22,7 @@ function ProductDetail() {
     localStorage.setItem("cart", JSON.stringify(cart));
     alert("Product added to cart");
   };
+
   const handleBack = () => {
     navigate(-1); // Navigate back to the previous page
   };
@@ -29,19 +30,20 @@ function ProductDetail() {
   if (!product) return <div>Loading...</div>;
 
   return (
-    <div className="product-card">
-      <button onClick={handleBack} className="back-button">
-        Back
-      </button>{" "}
-      {/* Back button */}
-      <h1>{product.name}</h1>
+    <div className="product-layout">
+      <div className="product-card">
+        <div className="product-details">
+          <button onClick={handleBack} className="back-button">
+            Back
+          </button>
+          <h1>{product.name}</h1>
+          <p>{product.description}</p>
+          <p>${product.price}</p>
+          <button onClick={addToCart}>Add to Cart</button>
+        </div>
+      </div>
       <div className="product-image">
         <img src={product.image} alt={product.name} />
-      </div>
-      <div className="product-info">
-        <p>{product.description}</p>
-        <p>${product.price}</p>
-        <button onClick={addToCart}>Add to Cart</button>
       </div>
     </div>
   );
