@@ -30,19 +30,17 @@ function ProductDetail() {
   if (!product) return <div>Loading...</div>;
 
   return (
-    <div className="product-layout">
-      <div className="product-card">
-        <div className="product-details">
-          <button onClick={handleBack} className="back-button">
-            Back
-          </button>
-          <h1>{product.name}</h1>
-          <p>{product.description}</p>
-          <p>${product.price}</p>
-          <button onClick={addToCart}>Add to Cart</button>
-        </div>
+    <div className="product-card-2">
+      <div className="product-details-2">
+        <button onClick={handleBack} className="back-button">
+          Back
+        </button>
+        <h1>{product.name}</h1>
+        <p>{product.description}</p>
+        <p>${product.price}</p>
+        <button onClick={addToCart}>Add to Cart</button>
       </div>
-      <div className="product-image">
+      <div className="product-image-2">
         <img src={product.image} alt={product.name} />
       </div>
     </div>

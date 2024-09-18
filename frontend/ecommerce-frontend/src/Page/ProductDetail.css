@@ -1,4 +1,4 @@
-/* ProductDetail.css */
+
 
 .product-layout {
     display: flex;
@@ -8,7 +8,7 @@
     /* Adjust spacing between image and details */
 }
 
-.product-card {
+.product-card-2 {
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -17,11 +17,11 @@
     /* Adjust width as needed */
 }
 
-.product-details {
+.product-details-2 {
     text-align: left;
 }
 
-.product-image {
+.product-image-2 {
     width: 70%;
     height: 80%;
     /* Adjust width as needed */

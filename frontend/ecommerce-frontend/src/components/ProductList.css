@@ -1,55 +1,41 @@
-/* ProductList.css */
-
-body {
-    background-color: #f4f4f4;
-    /* Light grey background */
-    font-family: 'Arial', sans-serif;
-    /* Clean, simple font */
-}
-
 .product-list {
     text-align: center;
-    /* Center-align the heading */
     padding: 20px;
-    max-width: 1280px;
-    /* Restrict the maximum width */
-    margin: auto;
-    /* Center the container */
 }
 
 .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    /* Create a responsive grid */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
-    /* Space between cards */
 }
 
 .product-card {
-    background-color: #fff;
+    width: 200px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    /* Soft shadow for depth */
     overflow: hidden;
-    /* Ensures nothing hangs out of the card */
-    transition: transform 0.3s, box-shadow 0.3s;
-    /* Smooth transitions for hover effects */
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    /* Raise the card slightly on hover */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    /* Darker shadow on hover */
 }
 
-.product-image img {
+.product-card a {
+    color: inherit;
+    /* Prevents color changes */
+    text-decoration: none;
+    /* Removes underline */
+}
+
+.product-image {
     width: 100%;
-    /* Ensure the image covers the card width */
-    height: 200px;
-    /* Fixed height for images */
+    height: 150px;
     object-fit: cover;
-    /* Cover the set height */
+    /* Ensures the image covers the area nicely */
 }
 
 .product-details {
@@ -57,18 +43,11 @@ body {
 }
 
 .product-details h2 {
-    font-size: 18px;
-    /* Larger font for visibility */
-    margin: 10px 0 5px;
-    /* Spacing around the name */
-    color: #333;
-    /* Dark grey for text */
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
 .product-details p {
-    font-size: 16px;
-    color: #666;
-    /* Lighter grey for price */
-    margin-bottom: 0;
-    /* Reduce space below the price */
+    font-size: 14px;
+    color: #555;
 }
