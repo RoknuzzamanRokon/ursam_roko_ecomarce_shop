@@ -1,7 +1,8 @@
-from rest_framework import viewsets, serializers, generics, filters, status
+from django.db.models import Q
+from rest_framework import generics, serializers, viewsets, status
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from .models import Product, Order
 from .serializers import ProductSerializer, OrderSerializer, UserSerializer
 
@@ -17,7 +18,9 @@ class ProductSearchView(generics.ListAPIView):
     def get_queryset(self):
         query = self.request.query_params.get('query', None)
         if query is not None:
-            return self.queryset.filter(Q(name__icontains=query) | Q(description__icontains=query))
+            return self.queryset.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
         return self.queryset
 
 class ProductViewSet(viewsets.ModelViewSet):

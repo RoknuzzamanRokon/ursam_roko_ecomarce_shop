@@ -8,7 +8,8 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
-import ProductDetail from "./Page/ProductDetail";
+import HomePage from "./page/HomePage";
+import ProductDetail from "./page/ProductDetail";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Register from "./components/Register";
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           {/* Homepage */}
           <Route path="/" element={<ProductList />} />
+          <Route path="/" element={<HomePage />} />
 
           {/* Categories */}
           <Route path="/breaded" element={<ProductList category="Breaded" />} />
