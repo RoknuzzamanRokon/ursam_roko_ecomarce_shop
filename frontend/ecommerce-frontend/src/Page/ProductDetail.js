@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "./ProductDetail.css"; // Ensure the CSS is imported
+import "./style/ProductDetail.css";
 
 function ProductDetail() {
   const { id } = useParams();

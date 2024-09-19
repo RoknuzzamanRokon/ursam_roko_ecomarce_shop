@@ -1,10 +1,9 @@
-// components/Footer.js
 import React from "react";
-import "./Footer.css";
+import "./style/Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer mt-auto">
       <div className="footer-content">
         <p>© 2024 Rokunuzzaman. All rights reserved.</p>
         <ul className="footer-links">
