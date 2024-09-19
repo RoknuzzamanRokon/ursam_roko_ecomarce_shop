@@ -11,7 +11,7 @@ function ProductDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/products/products/${id}/`)
+      .get(`http://localhost:8000/api/products/${id}/`)
       .then((res) => {
         setProduct(res.data);
       });

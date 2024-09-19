@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Product, Order
-from .serializers import ProductSerializer, OrderSerializer, UserSerializer
+from .serializers import ProductSerializer, UserSerializer, ProductSearchSerializer
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,16 +12,16 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'price', 'image']
 
 class ProductSearchView(generics.ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductSearchSerializer
 
     def get_queryset(self):
         query = self.request.query_params.get('query', None)
-        if query is not None:
-            return self.queryset.filter(
+        queryset = Product.objects.all()
+        if query:
+            queryset = queryset.filter(
                 Q(name__icontains=query) | Q(description__icontains=query)
             )
-        return self.queryset
+        return queryset
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -32,13 +32,13 @@ class ProductViewSet(viewsets.ModelViewSet):
         product.delete()
         return Response({'message': 'Product deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+# class OrderViewSet(viewsets.ModelViewSet):
+#     queryset = Order.objects.all()
+#     serializer_class = OrderSerializer
+#     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+#     def get_queryset(self):
+#         return self.queryset.filter(user=self.request.user)
 
 @api_view(['POST'])
 def register_user(request):

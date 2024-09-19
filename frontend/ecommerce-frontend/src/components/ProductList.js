@@ -8,7 +8,7 @@ function ProductList() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/products/products").then((res) => {
+    axios.get("http://localhost:8000/api/products").then((res) => {
       setProducts(res.data);
     });
   }, []);
