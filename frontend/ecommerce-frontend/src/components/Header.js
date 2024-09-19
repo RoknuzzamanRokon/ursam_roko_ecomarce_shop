@@ -32,7 +32,7 @@ function Header() {
         <button type="submit">Search</button>
       </form>
       <nav className="nav-links">
-        <Link to="/contact">Contact Us</Link>{" "}
+        <a href="https://checksmyportfolio.com/">Contact Me</a>
         {/* Using Link for SPA behavior */}
         <Link to="/recent-viewed">Recent Viewed</Link>
         <Link to="/register">Register</Link>
@@ -41,7 +41,7 @@ function Header() {
       <div className="cart-info">
         <span>Shopping Cart</span>
         <span className="cart-count">0</span>
-        <span>د.ك 0.000</span>
+        <span>0.000 tk</span>
       </div>
     </header>
   );
