@@ -23,3 +23,13 @@
     color: white;
     border-radius: 5px;
 }
+
+
+.navbar-logo {
+    height: 20px;
+    /* Adjust size as needed */
+    width: 20px;
+    /* Maintain aspect ratio */
+
+}
+
