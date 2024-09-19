@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style/Cart.css";
 
 function Cart() {
@@ -6,6 +7,8 @@ function Cart() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -35,7 +38,13 @@ function Cart() {
   };
 
   const handleProceedToPayment = () => {
-    alert("Proceeding to payment...");
+    const isLoggedIn = localStorage.getItem("isLoggedIn"); // Example of storing login status in localStorage
+
+    if (!isLoggedIn) {
+      navigate("/register"); // Redirect to the registration page if not logged in
+    } else {
+      navigate("/payment"); // Redirect to the payment page if logged in
+    }
   };
 
   if (cartItems.length === 0) {
