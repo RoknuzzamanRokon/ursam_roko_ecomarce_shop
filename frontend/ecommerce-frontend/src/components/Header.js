@@ -15,11 +15,14 @@ function Header() {
     navigate(`/search?query=${searchTerm}`); // Redirect to search page with the query
   };
 
+  const goToCart = () => {
+    navigate("/cart"); // Redirect to the shopping cart page
+  };
+
   return (
     <header className="header">
       <div className="logo">
-        <img src="path-to-your-logo.jpg" alt="Company Logo" />{" "}
-        {/* Update the logo URL */}
+        <img src="path-to-your-logo.jpg" alt="Company Logo" />
       </div>
       <form onSubmit={handleSearchSubmit} className="search-bar-form">
         <input
@@ -33,12 +36,11 @@ function Header() {
       </form>
       <nav className="nav-links">
         <a href="https://checksmyportfolio.com/">Contact Me</a>
-        {/* Using Link for SPA behavior */}
         <Link to="/recent-viewed">Recent Viewed</Link>
         <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
       </nav>
-      <div className="cart-info">
+      <div className="cart-info" onClick={goToCart}>
         <span>Shopping Cart</span>
         <span className="cart-count">0</span>
         <span>0.000 tk</span>
