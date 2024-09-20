@@ -12,8 +12,8 @@ import HomePage from "./page/HomePage";
 import ProductDetail from "./page/ProductDetail";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Register from "./page/Register";
+import Login from "./page/Login";
 import SearchResults from "./components/SearchResults";
 
 function App() {

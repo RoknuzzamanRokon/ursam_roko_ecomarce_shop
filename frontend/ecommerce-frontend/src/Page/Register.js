@@ -1,7 +1,6 @@
-// src/components/Register.js
-
 import React, { useState } from "react";
 import axios from "axios";
+import "./style/Register.css"; // Import the CSS file
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -27,40 +26,47 @@ function Register() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
+    <div className="register-container">
+      <h2 className="register-title">Register</h2>
+      <form onSubmit={handleSubmit} className="register-form">
+        <div className="input-group">
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
+            id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            className="input-field"
           />
         </div>
-        <div>
-          <label>Email (optional):</label>
+        <div className="input-group">
+          <label htmlFor="email">Email (optional):</label>
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="input-field"
           />
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="input-group">
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="input-field"
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="register-button">
+          Register
+        </button>
       </form>
     </div>
   );
 }
 
 export default Register;
- 
