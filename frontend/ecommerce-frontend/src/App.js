@@ -10,11 +10,12 @@ import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import HomePage from "./page/HomePage";
 import ProductDetail from "./page/ProductDetail";
-import Cart from "./components/Cart";
+import Cart from "./page/Cart";
 import Checkout from "./components/Checkout";
 import Register from "./page/Register";
 import Login from "./page/Login";
 import SearchResults from "./components/SearchResults";
+import Payment from "./page/Payment";
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
           <Route path="/register/" element={<Register />} />
           <Route path="/login/" element={<Login />} />
           <Route path="/search" element={<SearchResults />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
         <Footer /> {/* Footer Component */}
       </Router>

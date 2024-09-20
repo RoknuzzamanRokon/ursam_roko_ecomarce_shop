@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import register_user, ProductSearchView, ProductViewSet
+from .views import register_user, ProductSearchView, ProductViewSet, UserDetailView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -16,5 +16,8 @@ urlpatterns = [
     path('register/', register_user, name='register'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('users/<int:id>/', UserDetailView.as_view(), name='user-detail'),  # Updated to use CBV
+
 
 ]

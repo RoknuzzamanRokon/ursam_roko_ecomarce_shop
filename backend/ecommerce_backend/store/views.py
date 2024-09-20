@@ -5,6 +5,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Product, Order
 from .serializers import ProductSerializer, UserSerializer, ProductSearchSerializer
+from rest_framework import generics
+from .models import User
+from rest_framework.exceptions import NotFound
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,3 +52,17 @@ def register_user(request):
         return Response({'message': 'User created successfully', 'user_id': user.id}, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserDetailView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'id'  # This specifies which field to use for lookup, by default it's 'pk'
+
+    def get(self, request, *args, **kwargs):
+        try:
+            user = self.get_object()  # This fetches the user based on 'id'
+            serializer = self.get_serializer(user)
+            return Response(serializer.data)
+        except User.DoesNotExist:
+            raise NotFound({"error": "User not found"})

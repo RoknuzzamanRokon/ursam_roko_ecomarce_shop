@@ -38,10 +38,10 @@ function Cart() {
   };
 
   const handleProceedToPayment = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn"); // Example of storing login status in localStorage
+    const authTokens = localStorage.getItem("authTokens"); 
 
-    if (!isLoggedIn) {
-      navigate("/register"); // Redirect to the registration page if not logged in
+    if (!authTokens) {
+      navigate("/login"); // Redirect to the login page if not logged in
     } else {
       navigate("/payment"); // Redirect to the payment page if logged in
     }
@@ -51,12 +51,12 @@ function Cart() {
     return <div>Your cart is empty</div>;
   }
 
+
   return (
     <div className="cart-container">
       <div className="cart-items">
         <h1>Your Shopping Cart</h1>
 
-        {/* Add a row for the headers */}
         <div className="cart-header">
           <span className="cart-header-name"></span>
           <span className="cart-header-name">Product Name</span>
@@ -87,7 +87,7 @@ function Cart() {
 
       <div className="cart-summary">
         <h2>Cart Summary</h2>
-        <p>Total Items: {totalItems}</p> {/* Display total items */}
+        <p>Total Items: {totalItems}</p> 
         <p>Total Products: {totalProducts}</p>
         <p>Total Price: ${totalPrice}</p>
         <button onClick={handleProceedToPayment} className="payment-button">

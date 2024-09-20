@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import "./style/Register.css"; // Import the CSS file
+import "./style/Register.css";
+
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -65,6 +67,9 @@ function Register() {
           Register
         </button>
       </form>
+      <div>
+        I have already an account. Go <Link to="/login">Login</Link> page.
+      </div>
     </div>
   );
 }
