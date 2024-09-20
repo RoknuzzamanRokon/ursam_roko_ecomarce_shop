@@ -75,3 +75,22 @@
     margin-left: 10px;
     font-weight: bold;
 }
+
+
+
+.user-name {
+    margin-right: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style for the logout link */
+.logout-link {
+    cursor: pointer;
+    color: red;
+    margin-left: 10px;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}

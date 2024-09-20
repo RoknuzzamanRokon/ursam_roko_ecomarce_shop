@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import "./style/Login.css";
 
@@ -79,6 +79,10 @@ function Login() {
       <div className="divider">or</div>
 
       <div id="google-signin-button" className="google-button"></div>
+
+      <div>
+        I am new User. First < Link to="/register">Register</Link> here.
+      </div>
     </div>
   );
 }

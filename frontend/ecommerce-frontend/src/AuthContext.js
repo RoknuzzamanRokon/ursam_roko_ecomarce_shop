@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
-
+import {jwtDecode} from "jwt-decode"; // Correct import for jwtDecode
 
 export const AuthContext = createContext();
 
@@ -10,16 +9,22 @@ export function AuthProvider({ children }) {
     return tokens ? JSON.parse(tokens) : null;
   });
 
-  const [user, setUser] = useState(() => {
-    const tokens = localStorage.getItem("authTokens");
-    if (tokens) {
-      const decodedToken = jwtDecode(JSON.parse(tokens).access);
-      return decodedToken;
-    }
-    return null;
-  });
+  const [user, setUser] = useState(null);
 
-  // Regular login function
+  // Function to fetch user details using user_id
+  const fetchUserDetails = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/users/${userId}/`
+      );
+      const data = await response.json();
+      return data; // Should return user details like username, email, etc.
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+      return null;
+    }
+  };
+
   const loginUser = async (username, password) => {
     const response = await fetch("http://localhost:8000/api/token/", {
       method: "POST",
@@ -31,47 +36,49 @@ export function AuthProvider({ children }) {
     const data = await response.json();
 
     if (response.status === 200) {
-      setAuthTokens(data);
-      setUser(jwtDecode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
-      return true;
-    } else {
-      return false;
+      const decodedToken = jwtDecode(data.access);
+      const userDetails = await fetchUserDetails(decodedToken.user_id); // Fetch user details
+      if (userDetails) {
+        setUser(userDetails); // Set user details in the state
+        setAuthTokens(data);
+        localStorage.setItem("authTokens", JSON.stringify(data));
+        return true;
+      }
     }
+    return false;
   };
 
-  // Google login function
   const googleLoginUser = (googleUserData) => {
-    // Assuming `googleUserData` contains user information returned from Google.
-    // If you want to handle tokens provided by Google, you could store and use them similarly to `authTokens`.
-    setUser(googleUserData);
-    localStorage.setItem("googleUser", JSON.stringify(googleUserData)); // Store user info locally
+    setUser(googleUserData); // Set Google user data to user state
+    localStorage.setItem("googleUser", JSON.stringify(googleUserData)); // Store Google user in localStorage
   };
 
   const logoutUser = () => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("authTokens");
-    localStorage.removeItem("googleUser"); // Also remove Google user info if logged in via Google
+    localStorage.removeItem("googleUser");
   };
 
-  // Load Google or JWT user on initialization
   useEffect(() => {
     const tokens = localStorage.getItem("authTokens");
     const googleUser = localStorage.getItem("googleUser");
 
     if (tokens) {
+      const decodedToken = jwtDecode(JSON.parse(tokens).access);
+      fetchUserDetails(decodedToken.user_id).then((userDetails) => {
+        if (userDetails) {
+          setUser(userDetails);
+        }
+      });
       setAuthTokens(JSON.parse(tokens));
-      setUser(jwtDecode(JSON.parse(tokens).access));
     } else if (googleUser) {
-      setUser(JSON.parse(googleUser)); // Load Google user if they are logged in
-    } else {
-      setUser(null);
+      setUser(JSON.parse(googleUser));
     }
   }, []);
 
   const contextData = {
-    user,
+    user, // This now contains full user details
     authTokens,
     loginUser,
     googleLoginUser,
