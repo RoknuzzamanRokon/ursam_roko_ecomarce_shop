@@ -29,7 +29,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <img src="path-to-your-logo.jpg" alt="Company Logo" />
+        <img src="/assets/images/ursamRokoLogo.png" alt="UrsamRokoLogo" />
       </div>
       <form onSubmit={handleSearchSubmit} className="search-bar-form">
         <input
@@ -50,7 +50,7 @@ function Header() {
             <span className="user-name">
               Welcome, {user?.username || user?.name || user?.email || "User"}
             </span>
-            
+
             <span className="logout-link" onClick={handleLogout}>
               Logout
             </span>
