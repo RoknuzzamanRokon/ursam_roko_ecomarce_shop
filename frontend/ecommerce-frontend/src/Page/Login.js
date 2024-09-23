@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import { AuthContext } from "../AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode"; // Correct import for jwt-decode
+import { jwtDecode as jwtDecode } from "jwt-decode"; // Correct import for jwt-decode
 import "./style/Login.css";
 
 // Input component for username and password
@@ -24,7 +24,7 @@ function Login() {
   const handleGoogleLoginSuccess = useCallback(
     (response) => {
       const token = response.credential;
-      const userObject = jwt_decode(token);
+      const userObject = jwtDecode(token);
       googleLoginUser(userObject);
       navigate("/");
     },
