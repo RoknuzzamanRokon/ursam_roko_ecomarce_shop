@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { AuthContext } from "../AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import jwt_decode from "jwt-decode"; // Correct import for jwt-decode
 import "./style/Login.css";
 
 // Input component for username and password
@@ -20,6 +20,17 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  // Use useCallback to memoize handleGoogleLoginSuccess
+  const handleGoogleLoginSuccess = useCallback(
+    (response) => {
+      const token = response.credential;
+      const userObject = jwt_decode(token);
+      googleLoginUser(userObject);
+      navigate("/");
+    },
+    [googleLoginUser, navigate]
+  ); // Added necessary dependencies
+
   useEffect(() => {
     window.google.accounts.id.initialize({
       client_id: "YOUR_GOOGLE_CLIENT_ID",
@@ -36,7 +47,7 @@ function Login() {
         logo_alignment: "left",
       }
     );
-  }, []);
+  }, [handleGoogleLoginSuccess]); // handleGoogleLoginSuccess is now stable because of useCallback
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,13 +57,6 @@ function Login() {
     } else {
       alert("Invalid credentials");
     }
-  };
-
-  const handleGoogleLoginSuccess = (response) => {
-    const token = response.credential;
-    const userObject = jwtDecode(token);
-    googleLoginUser(userObject);
-    navigate("/");
   };
 
   return (
@@ -81,7 +85,7 @@ function Login() {
       <div id="google-signin-button" className="google-button"></div>
 
       <div>
-        I am new User. First < Link to="/register">Register</Link> here.
+        I am new User. First <Link to="/register">Register</Link> here.
       </div>
     </div>
   );
