@@ -1,109 +1,109 @@
-/* Payment container */
-.payment-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 40px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.product-card-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.product-image-2 {
+    flex: 1;
     text-align: center;
-    font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* Title styling */
-.payment-title {
-    font-size: 28px;
-    margin-bottom: 30px;
+.product-image-2 img {
+    width: 600px;
+    height: 450px;
+    object-fit: cover;
+}
+
+.product-details-2 {
+    flex: 1;
+    padding: 20px;
+    margin-top: -150px;
+    text-align: left;
+}
+
+.product-details-2 h1 {
+    font-size: 24px;
     color: #333;
-    font-weight: bold;
-    text-align: left;
+    margin-bottom: 10px;
 }
 
-/* Form styling */
-.payment-form {
+.product-details-2 p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.quantity-selector {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    /* Space from the last paragraph */
 }
 
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
+.quantity-button {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    user-select: none;
+    /* Prevent text selection */
 }
 
-.form-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 8px;
-    color: #555;
-    font-weight: 500;
+.quantity-input {
+    width: 50px;
+    /* Fixed width for the quantity input */
+    text-align: center;
+    /* Center the text */
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 2px;
+    margin: 0 5px;
+    /* Space between buttons and the input */
 }
 
-.form-group input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+
+.back-button {
+    padding: 8px 50px;
+    margin-top: 10px;
+    border: none;
+    background-color: #a30f40;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin: 12px;
 }
 
-.form-group input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-    outline: none;
-}
 
-/* Form-row for expiry date and CVV */
-.form-row {
-    display: flex;
-    justify-content: space-between;
-}
 
-.form-row .form-group {
-    width: 48%;
-}
-
-/* Payment button */
-.payment-button {
-    width: 100%;
-    padding: 14px;
+.add-to-cart-button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
     background-color: #007bff;
     color: white;
-    border: none;
-    border-radius: 6px;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-.payment-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+.back-button:hover {
+    background-color: #d10606;
 }
 
-/* Success message */
-.payment-success {
-    margin-top: 20px;
-    color: green;
-    font-size: 18px;
+.add-to-cart-button:hover {
+    background-color: #006205;
+}
+
+
+.total-price {
+    font-size: 20px;
+    color: #000;
+    margin-top: 10px;
     font-weight: bold;
-    text-align: center;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .payment-container {
-        padding: 20px;
-        width: 90%;
-    }
-
-    .form-row {
-        flex-direction: column;
-    }
-
-    .form-row .form-group {
-        width: 100%;
-    }
 }
