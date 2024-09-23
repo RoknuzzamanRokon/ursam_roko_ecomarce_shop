@@ -46,11 +46,15 @@
 
 .quantity-button {
     padding: 8px 12px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    user-select: none;
-    /* Prevent text selection */
+        cursor: pointer;
+        /* -webkit-user-select: none; */
+        user-select: none;
+        background-color: #42ff20;
+        border-radius: 8px;
+}
+
+.quantity-button:hover {
+    background-color: #0392eb;
 }
 
 .quantity-input {
