@@ -1,18 +1,32 @@
 from django.db.models import Q
+from django.http import JsonResponse
+
 from rest_framework import generics, serializers, viewsets, status, permissions
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework.exceptions import NotFound
+
+
 from .models import Product, Order
 from .serializers import ProductSerializer, UserSerializer, ProductSearchSerializer
-from rest_framework import generics
 
 from django.contrib.auth.models import User
 
-from rest_framework.exceptions import NotFound
 
 from .models import MarketList, MarketListItem
 from .serializers import MarketListSerializer, MarketListItemSerializer
+
+
+
+from .utils import get_braintree_gateway
+
+
+
+# payment/utils.py or directly in views.py
+
+
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -103,3 +117,33 @@ class LastMarketListView(generics.RetrieveAPIView):
 
     def get_object(self):
         return MarketList.objects.filter(user=self.request.user).order_by('-date').first()
+    
+
+
+
+
+
+
+
+def create_payment(request):
+    gateway = get_braintree_gateway()
+    amount = "10.00"  # Set this dynamically based on cart contents or user input
+
+    if request.method == "POST":
+        nonce = request.POST.get('payment_method_nonce')
+        result = gateway.transaction.sale({
+            "amount": amount,
+            "payment_method_nonce": nonce,
+            "options": {
+                "submit_for_settlement": True
+            }
+        })
+
+        if result.is_success:
+            return JsonResponse({"success": True, "transaction": {"id": result.transaction.id, "amount": result.transaction.amount}})
+        else:
+            return JsonResponse({"success": False, "error": result.message})
+
+    else:
+        client_token = gateway.client_token.generate()
+        return JsonResponse({"client_token": client_token})    

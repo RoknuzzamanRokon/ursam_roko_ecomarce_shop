@@ -144,3 +144,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 APPEND_SLASH = True 
+
+
+# settings.py
+
+BRAINTREE_MERCHANT_ID = 'ws233j5vkpykzq62'
+BRAINTREE_PUBLIC_KEY = 'qjvj8btrz98wckcf'
+BRAINTREE_PRIVATE_KEY = '7a9612020b021340d33f11a8a6b80370'
