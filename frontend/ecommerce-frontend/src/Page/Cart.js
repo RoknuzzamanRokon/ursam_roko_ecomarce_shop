@@ -12,7 +12,7 @@ function Cart() {
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     consolidateCartItems(cart);
-  }, []);
+  });
 
   const consolidateCartItems = (cart) => {
     const consolidatedItems = cart.reduce((acc, item) => {
@@ -110,8 +110,8 @@ function Cart() {
 
       <div className="cart-summary">
         <h2>Cart Summary</h2>
-        <p>Total Items: {totalItems}</p>
-        <p>Total Products: {totalProducts}</p>
+        <p>Total Products: {totalItems}</p>
+        <p>Total Items: {totalProducts}</p>
         <p>Total Price: ${totalPrice}</p>
         <button onClick={handleProceedToPayment} className="payment-button">
           Proceed to Payment

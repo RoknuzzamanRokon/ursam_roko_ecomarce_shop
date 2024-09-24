@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./style/ProductDetail.css";
+import Toast from "../components/Toast";
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1); // State to manage quantity
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
 
   useEffect(() => {
     axios
@@ -22,7 +26,8 @@ function ProductDetail() {
     const productToAdd = { ...product, quantity };
     cart.push(productToAdd);
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product added to cart");
+    setToastMessage("Product added to cart");
+    setShowToast(true);
   };
 
   const handleBack = () => {
@@ -69,6 +74,9 @@ function ProductDetail() {
         <button onClick={addToCart} className="add-to-cart-button">
           Add to Cart
         </button>
+        {showToast && (
+          <Toast message={toastMessage} onDismiss={() => setShowToast(false)} />
+        )}
       </div>
     </div>
   );
