@@ -1,0 +1,42 @@
+.toast {
+    position: fixed;
+    top: 20px;
+    /* Distance from the top of the viewport */
+    left: 50%;
+    /* Center horizontally */
+    transform: translateX(-50%);
+    /* Ensure it's centered by shifting it left by half its width */
+    padding: 10px 20px;
+    color: #fff;
+    /* White text color */
+    background-color: #333;
+    /* Dark background for the toast */
+    border-radius: 5px;
+    /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* Slight shadow for 3D effect */
+    z-index: 1000;
+    /* Make sure it's on top of other content */
+    font-size: 16px;
+    /* Readable text size */
+    min-width: 200px;
+    /* Minimum width of the toast */
+    text-align: center;
+    /* Center the text inside the toast */
+    animation: fadeInOut 3s linear forwards;
+    /* Animation for fade in and out */
+}
+
+/* Keyframes for fade in and fade out effects */
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    10%,
+    90% {
+        opacity: 1;
+    }
+}
