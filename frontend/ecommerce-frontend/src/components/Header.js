@@ -43,10 +43,10 @@ function Header() {
       </form>
       <nav className="nav-links">
         <Link to="/recent-viewed">Recent Viewed</Link>
+        {user && <Link to="/market-list">Market List</Link>}
 
         {user ? (
           <>
-            {/* Show user name and Logout link if logged in */}
             <span className="user-name">
               Welcome, {user?.username || user?.name || user?.email || "User"}
             </span>
@@ -56,7 +56,6 @@ function Header() {
             </span>
           </>
         ) : (
-          // Show Login and Register links if not logged in
           <>
             <Link to="/register">Register</Link>
             <Link to="/login">Login</Link>
