@@ -1,13 +1,18 @@
 from django.db.models import Q
-from rest_framework import generics, serializers, viewsets, status
+from rest_framework import generics, serializers, viewsets, status, permissions
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Product, Order
 from .serializers import ProductSerializer, UserSerializer, ProductSearchSerializer
 from rest_framework import generics
-from .models import User
+
+from django.contrib.auth.models import User
+
 from rest_framework.exceptions import NotFound
+
+from .models import MarketList, MarketListItem
+from .serializers import MarketListSerializer, MarketListItemSerializer
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -66,3 +71,35 @@ class UserDetailView(generics.RetrieveAPIView):
             return Response(serializer.data)
         except User.DoesNotExist:
             raise NotFound({"error": "User not found"})
+        
+
+
+
+
+
+
+
+
+class MarketListView(generics.ListCreateAPIView):
+    serializer_class = MarketListSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return MarketList.objects.filter(user=self.request.user).order_by('-date')
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class MarketListDetailView(generics.RetrieveAPIView):
+    serializer_class = MarketListSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return MarketList.objects.filter(user=self.request.user)
+
+class LastMarketListView(generics.RetrieveAPIView):
+    serializer_class = MarketListSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return MarketList.objects.filter(user=self.request.user).order_by('-date').first()
