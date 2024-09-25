@@ -20,7 +20,11 @@ function Cart() {
       if (found) {
         found.quantity += item.quantity;
       } else {
-        acc.push({ ...item });
+        acc.push({
+          ...item,
+          price: parseFloat(item.price),
+          quantity: parseInt(item.quantity, 10)
+        });
       }
       return acc;
     }, []);
@@ -51,11 +55,15 @@ function Cart() {
       .map((item) => {
         if (item.id === id) {
           const newQuantity = item.quantity + delta;
-          return { ...item, quantity: Math.max(0, newQuantity) }; // Prevent negative quantities
+          return { 
+            ...item, 
+            quantity: Math.max(0, newQuantity),
+            price: parseFloat(item.price)
+          };
         }
         return item;
       })
-      .filter((item) => item.quantity > 0); // Remove items with 0 quantity
+      .filter((item) => item.quantity > 0);
     setCartItems(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
     calculateTotal(newCart);

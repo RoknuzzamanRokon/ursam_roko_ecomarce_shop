@@ -7,20 +7,15 @@ function MarketList() {
   const [allPayments, setAllPayments] = useState([]);
 
   useEffect(() => {
-    // Fetch last payment and all payments data
-    const fetchPayments = async () => {
-      try {
-        const lastPaymentResponse = await axios.get('http://localhost:8000/api/payments/last/');
-        const allPaymentsResponse = await axios.get('http://localhost:8000/api/payments/');
-        
-        setLastPayment(lastPaymentResponse.data);
-        setAllPayments(allPaymentsResponse.data);
-      } catch (error) {
-        console.error('Error fetching payment data:', error);
+    const fetchMarketLists = () => {
+      const marketLists = JSON.parse(localStorage.getItem('marketLists')) || [];
+      if (marketLists.length > 0) {
+        setLastPayment(marketLists[marketLists.length - 1]);
+        setAllPayments(marketLists);
       }
     };
 
-    fetchPayments();
+    fetchMarketLists();
   }, []);
 
   return (
@@ -35,7 +30,7 @@ function MarketList() {
           <p>Total Items: {lastPayment.total_items}</p>
           <ul>
             {lastPayment.items.map((item, index) => (
-              <li key={index}>{item.name} - Quantity: {item.quantity}</li>
+              <li key={index}>{item.product_name} - Quantity: {item.quantity}</li>
             ))}
           </ul>
         </div>

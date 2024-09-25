@@ -102,7 +102,15 @@ class MarketListView(generics.ListCreateAPIView):
         return MarketList.objects.filter(user=self.request.user).order_by('-date')
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        market_list = serializer.save(user=self.request.user)
+        item_data = self.request.data.get('items', [])
+        for item in item_data:
+            MarketListItem.objects.create(
+                market_list=market_list,
+                product=item.get('product'),
+                quantity=item.get('quantity'),
+                price=item.get('price')
+            )
 
 class MarketListDetailView(generics.RetrieveAPIView):
     serializer_class = MarketListSerializer
