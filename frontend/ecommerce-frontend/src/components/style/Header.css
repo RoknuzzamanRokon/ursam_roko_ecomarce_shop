@@ -1,6 +1,7 @@
 body {
-    padding-top: 80px;
+    padding-top: 130px;
 }
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -82,21 +83,66 @@ body {
     font-weight: bold;
 }
 
-
-
 .user-name {
     margin-right: 15px;
     font-weight: bold;
     color: #333;
 }
 
-/* Style for the logout link */
 .logout-link {
     cursor: pointer;
     color: red;
     margin-left: 10px;
 }
 
-.logout-link:hover {
-    text-decoration: underline;
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 1;
+    }
+
+    .logo {
+        order: 2;
+    }
+
+    .search-bar-form {
+        order: 3;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .nav-links, .cart-info {
+        display: none;
+        width: 100%;
+        order: 4;
+        margin-top: 10px;
+    }
+
+    .nav-links.active, .cart-info.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links a, .cart-info {
+        margin: 5px 0;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
 }

@@ -1,23 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style/Navbar.css";
 
 function Navbar() {
   return (
     <nav className="navbar">
-      <a href="/">
-        <img
-          src="/assets/images/01.png"
-          alt="Homepage"
-          className="navbar-logo"
-        />
-        Homepage
-      </a>
-      <a href="#">Squid & Octopus</a>
-      <a href="#">Frozen Fishes</a>
-      <a href="#">Shrimps & Lobsters</a>
-      <a href="#">Shell Fishes</a>
-      <a href="#">Fillets & Portions</a>
-      <a href="#">Asian Mart</a>
+      <div className="navbar-container">
+        <Link className="homePageButton" to="/">
+          <img
+            src="/assets/images/01.png"
+            alt="Homepage"
+            className="navbar-logo"
+          />
+          Homepage
+        </Link>
+        <div className="navbar-links">
+          <Link to="/category/squid-octopus">Squid & Octopus</Link>
+          <Link to="/category/frozen-fishes">Frozen Fishes</Link>
+          <Link to="/category/shrimps-lobsters">Shrimps & Lobsters</Link>
+          <Link to="/category/shell-fishes">Shell Fishes</Link>
+          <Link to="/category/fillets-portions">Fillets & Portions</Link>
+          <Link to="/category/asian-mart">Asian Mart</Link>
+        </div>
+      </div>
     </nav>
   );
 }

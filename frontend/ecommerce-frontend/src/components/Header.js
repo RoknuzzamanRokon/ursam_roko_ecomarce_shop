@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../AuthContext"; // Import AuthContext
+import { FaBars } from "react-icons/fa";
 import "./style/Header.css";
 
 function Header() {
   const { user, logoutUser } = useContext(AuthContext); // Get user and logoutUser from AuthContext
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -26,12 +28,19 @@ function Header() {
     navigate("/"); 
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className="header">
       <div className="logo">
         <img src="/assets/images/ursamRokoLogo.png" alt="UrsamRokoLogo" />
       </div>
-      <form onSubmit={handleSearchSubmit} className="search-bar-form">
+      <button className="menu-toggle" onClick={toggleMenu}>
+        <FaBars />
+      </button>
+      <form onSubmit={handleSearchSubmit} className={`search-bar-form ${isMenuOpen ? 'active' : ''}`}>
         <input
           type="text"
           placeholder="Search in 1000+ products..."
@@ -41,16 +50,14 @@ function Header() {
         />
         <button type="submit">Search</button>
       </form>
-      <nav className="nav-links">
+      <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
         <Link to="/recent-viewed">Recent Viewed</Link>
         {user && <Link to="/market-list">Market List</Link>}
-
         {user ? (
           <>
             <span className="user-name">
               Welcome, {user?.username || user?.name || user?.email || "User"}
             </span>
-
             <span className="logout-link" onClick={handleLogout}>
               Logout
             </span>
@@ -62,7 +69,7 @@ function Header() {
           </>
         )}
       </nav>
-      <div className="cart-info" onClick={goToCart}>
+      <div className={`cart-info ${isMenuOpen ? 'active' : ''}`} onClick={goToCart}>
         <span>Shopping Cart</span>
         <span className="cart-count">0</span>
       </div>
