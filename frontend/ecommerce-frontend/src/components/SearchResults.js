@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import { Container, Row, Col, Card, Spinner, Alert } from "react-bootstrap";
 
 function SearchResults() {
   const location = useLocation();
@@ -39,34 +40,58 @@ function SearchResults() {
   }, [query]);
 
   // Display loading state
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <Container className="text-center mt-5">
+        <Spinner animation="border" variant="primary" />
+        <p>Loading...</p>
+      </Container>
+    );
+  }
 
   // Display error state
-  if (error) return <div>Error: {error}</div>;
+  if (error) {
+    return (
+      <Container className="mt-5">
+        <Alert variant="danger">{error}</Alert>
+      </Container>
+    );
+  }
 
-  // Display results or no results message
   return (
-    <div>
-      <h1>Search Results for: "{query}"</h1>
+    <Container>
+      <h1 className="text-center mt-4">Search Results for: "{query}"</h1>
       {products.length > 0 ? (
-        <ul>
+        <Row className="mt-4">
           {products.map((product) => (
-            <li key={product.id}>
-              <img
-                src={product.image}
-                alt={product.name}
-                style={{ width: "100px", height: "100px" }}
-              />
-              <h2>{product.name}</h2>
-              <p>{product.description}</p>
-              <p>Price: ${product.price}</p>
-            </li>
+            <Col md={4} sm={6} xs={12} key={product.id} className="mb-4">
+              {/* Wrap the card with Link to navigate to product details */}
+              <Link to={`/product/${product.id}`} className="product-link">
+                <Card className="h-100">
+                  <Card.Img
+                    variant="top"
+                    src={product.image}
+                    alt={product.name}
+                    style={{ height: "200px", objectFit: "cover" }}
+                  />
+                  <Card.Body>
+                    <Card.Title>{product.name}</Card.Title>
+                    <Card.Text>{product.description}</Card.Text>
+                    <Card.Text>
+                      <strong>Price:</strong> ${product.price}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Link>
+            </Col>
           ))}
-        </ul>
+        </Row>
       ) : (
-        <div>No results found for "{query}".</div>
+        <Alert variant="warning" className="text-center mt-4">
+          No results found for "{query}".
+        </Alert>
       )}
-    </div>
+    </Container>
   );
 }
 

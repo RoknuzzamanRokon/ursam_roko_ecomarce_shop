@@ -1,0 +1,43 @@
+/* SearchResults.css */
+
+.search-results {
+    padding: 20px;
+  }
+  
+  .loading, .error, .no-results {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .product-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .product-details h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #000;
+  }
+  
+  .product-details p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
