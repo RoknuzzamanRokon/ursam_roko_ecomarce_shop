@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Carousel, Card, Button, Row, Col, Container } from "react-bootstrap";
 import "./style/ProductList.css";
 
 function ProductList() {
@@ -21,37 +22,49 @@ function ProductList() {
   }, [products]);
 
   return (
-    <div className="product-list">
+    <Container className="product-list">
       {products.length > 0 && (
-        <div className="slideshow">
-          <img
-            src={products[currentSlide].image}
-            alt={products[currentSlide].name}
-            className="slideshow-image"
-          />
-        </div>
-      )}
-      
-      <h1>All Products</h1>
-
-      <div className="card-container">
-        {products.map((product) => (
-          <div className="product-card" key={product.id}>
-            <Link to={`/product/${product.id}/`}>
+        <Carousel activeIndex={currentSlide} onSelect={setCurrentSlide}>
+          {products.map((product, index) => (
+            <Carousel.Item key={index}>
               <img
+                className="d-block w-100 slideshow-image"
                 src={product.image}
                 alt={product.name}
-                className="product-image"
               />
-              <div className="product-details">
-                <h2>{product.name}</h2>
+              <Carousel.Caption>
+                <h3>{product.name}</h3>
                 <p>${product.price}</p>
-              </div>
-            </Link>
-          </div>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      )}
+
+      <h1 className="text-center mt-5">All Products</h1>
+
+      <Row className="card-container">
+        {products.map((product) => (
+          <Col md={4} sm={6} xs={12} key={product.id} className="mb-4">
+            <Card className="product-card">
+              <Link to={`/product/${product.id}/`}>
+                <Card.Img
+                  variant="top"
+                  src={product.image}
+                  alt={product.name}
+                  className="product-image"
+                />
+                <Card.Body>
+                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>${product.price}</Card.Text>
+                  <Button variant="dark">View Details</Button> {/* Black primary button */}
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
