@@ -31,6 +31,7 @@ function ProductList() {
           />
         </div>
       )}
+      
       <h1>All Products</h1>
 
       <div className="card-container">

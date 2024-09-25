@@ -1,71 +1,48 @@
+/* Navbar.css */
+
 .navbar {
-    background-color: #4a28608c;
-    padding: 10px 0;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    z-index: 999;
-}
-
-.navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.navbar-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.navbar a {
-    text-decoration: none;
-    color: #ffffff;
-    padding: 10px 15px;
-    font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.navbar a:hover,
-.navbar a:focus {
-    background-color: #007BFF;
-    color: white;
-    border-radius: 5px;
-}
-
-.homePageButton {
+    background-color: #ffffff;
+  }
+  
+  .navbar-logo {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .navbar-brand {
     display: flex;
     align-items: center;
-    background-color: rgb(40, 54, 54);
-    border-radius: 10px;
-    color: #ff0000;
-    padding: 5px 10px;
-}
-
-.navbar-logo {
-    background-color: #61ff1e;
-    border-radius: 08px;
-    height: 20px;
-    width: 20px;
-    margin-right: 5px;
-}
-
-@media (max-width: 768px) {
-    .navbar-container {
-        flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .navbar-brand img {
+    margin-right: 10px;
+  }
+  
+  .navbar-links .nav-link {
+    color: #333;
+    font-size: 16px;
+    margin-right: 15px;
+  }
+  
+  .navbar-links .nav-link:hover {
+    color: #007bff;
+  }
+  
+  .menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 992px) {
+    .navbar-links .nav-link {
+      margin-right: 0;
+      margin-bottom: 10px;
+      text-align: center;
     }
-
-    .navbar-links {
-        margin-top: 10px;
-    }
-
-    .navbar a {
-        padding: 5px 10px;
-    }
-}
+  }
+  

@@ -21,6 +21,8 @@ import Login from "./page/Login";
 import Payment from "./page/Payment";
 import MarketList from './page/MarketList';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (

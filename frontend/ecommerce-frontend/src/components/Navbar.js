@@ -1,29 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./style/Navbar.css";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Navbar as BootstrapNavbar, Nav, Container, Button } from 'react-bootstrap';
+import './style/Navbar.css';
 
 function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <Link className="homePageButton" to="/">
-          <img
-            src="/assets/images/01.png"
-            alt="Homepage"
-            className="navbar-logo"
-          />
+    <BootstrapNavbar bg="light" expand="lg" expanded={isMenuOpen} className="navbar">
+      <Container>
+        <Link className="navbar-brand" to="/">
+          <img src="/assets/images/01.png" alt="Homepage" className="navbar-logo" />
           Homepage
         </Link>
-        <div className="navbar-links">
-          <Link to="/category/squid-octopus">Squid & Octopus</Link>
-          <Link to="/category/frozen-fishes">Frozen Fishes</Link>
-          <Link to="/category/shrimps-lobsters">Shrimps & Lobsters</Link>
-          <Link to="/category/shell-fishes">Shell Fishes</Link>
-          <Link to="/category/fillets-portions">Fillets & Portions</Link>
-          <Link to="/category/asian-mart">Asian Mart</Link>
-        </div>
-      </div>
-    </nav>
+        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleMenu}>
+          ☰
+        </BootstrapNavbar.Toggle>
+        <BootstrapNavbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto navbar-links">
+            <Nav.Link as={Link} to="/category/squid-octopus">
+              Squid & Octopus
+            </Nav.Link>
+            <Nav.Link as={Link} to="/category/frozen-fishes">
+              Frozen Fishes
+            </Nav.Link>
+            <Nav.Link as={Link} to="/category/shrimps-lobsters">
+              Shrimps & Lobsters
+            </Nav.Link>
+            <Nav.Link as={Link} to="/category/shell-fishes">
+              Shell Fishes
+            </Nav.Link>
+            <Nav.Link as={Link} to="/category/fillets-portions">
+              Fillets & Portions
+            </Nav.Link>
+            <Nav.Link as={Link} to="/category/asian-mart">
+              Asian Mart
+            </Nav.Link>
+          </Nav>
+        </BootstrapNavbar.Collapse>
+      </Container>
+    </BootstrapNavbar>
   );
 }
 
