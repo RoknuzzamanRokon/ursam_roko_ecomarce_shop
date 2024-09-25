@@ -65,7 +65,6 @@ function Header() {
       <div className="cart-info" onClick={goToCart}>
         <span>Shopping Cart</span>
         <span className="cart-count">0</span>
-        <span>0.000 tk</span>
       </div>
     </header>
   );

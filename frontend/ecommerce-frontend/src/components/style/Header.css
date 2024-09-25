@@ -1,3 +1,6 @@
+body {
+    padding-top: 80px;
+}
 .header {
     display: flex;
     justify-content: space-between;
@@ -5,7 +8,12 @@
     padding: 0 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 60px;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .logo img {
@@ -29,7 +37,7 @@
 }
 
 .search-bar-form button {
-    background-color: #007BFF;
+    background-color: #121f2e;
     color: white;
     border: none;
     padding: 6px 12px;
@@ -62,7 +70,7 @@
 }
 
 .cart-count {
-    background-color: #007BFF;
+    background-color: #192532;
     color: white;
     border-radius: 50%;
     padding: 4px 8px;
