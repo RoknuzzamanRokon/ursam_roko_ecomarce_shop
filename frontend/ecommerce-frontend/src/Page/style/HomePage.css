@@ -1,22 +1,20 @@
+
+.product-image {
+  height: 250px;
+  object-fit: cover;
+}
+
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+}
+
 .product-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .product-image {
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .product-card {
-    transition: transform 0.3s;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card-body {
-    text-align: center;
-  }
-  
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-link:hover {
+  text-decoration: none;
+  color: inherit;
+}

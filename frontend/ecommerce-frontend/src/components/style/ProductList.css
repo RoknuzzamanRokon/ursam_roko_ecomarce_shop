@@ -1,48 +1,69 @@
 /* ProductList.css */
 
 .product-list {
-    padding: 20px;
-  }
-  
-  .slideshow-image {
-    max-height: 500px;
-    object-fit: cover;
-  }
-  
-  .card-container {
-    margin-top: 20px;
-  }
-  
-  .product-card {
-    background-color: #000; /* Set card background to black */
-    color: #fff; /* Set text color to white for contrast */
-    transition: transform 0.2s;
-  }
-  
-  .product-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .product-image {
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .carousel-caption {
-    background-color: rgba(0, 0, 0, 0.8); /* Dark caption background */
-    padding: 10px;
-  }
-  
-  h1 {
-    color: #000; /* Black heading */
-  }
-  
-  .btn-dark {
-    background-color: #000; /* Black button */
-    border: none;
-  }
-  
-  .btn-dark:hover {
-    background-color: #333; /* Slightly lighter black on hover */
-  }
-  
+  padding: 0px;
+}
+
+.slideshow-image {
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.card-container {
+  margin-top: 20px;
+}
+
+.product-card {
+  background-color: #ffffff;
+  color: #000; /* Set text color to black for contrast */
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.8); /* Dark caption background */
+  padding: 10px;
+}
+
+h1 {
+  color: #000;
+  text-decoration: none; /* Black heading */
+}
+
+.btn-dark {
+  background-color: #00bb03; /* Green button */
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #4d4d4d;
+}
+
+.custom-title {
+  text-decoration: none;
+  color: #000000;
+}
+
+
+.custom-text {
+  text-decoration: none;
+  color: #000000; 
+}
+
+/* Add this rule to remove underline from links */
+.product-card a {
+  text-decoration: none; 
+  color: #000000;
+}
+
+.product-card a:hover {
+  text-decoration: none; 
+}
