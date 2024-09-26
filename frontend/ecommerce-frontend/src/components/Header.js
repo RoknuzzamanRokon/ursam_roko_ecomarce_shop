@@ -12,7 +12,7 @@ import {
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import LoginPopup from './LoginPopup';
-import { FaBars } from 'react-icons/fa'; // Import FaBars from react-icons/fa
+import { FaBars } from 'react-icons/fa'; 
 import './style/Header.css';
 
 function Header() {
@@ -70,6 +70,7 @@ function Header() {
           >
             <FaBars />
           </Navbar.Toggle>
+          
           <Navbar.Collapse id="basic-navbar-nav">
             <Form className="d-flex me-auto" onSubmit={handleSearchSubmit}>
               <FormControl
@@ -82,29 +83,41 @@ function Header() {
               <Button variant="outline-success" type="submit">
                 Search
               </Button>
-              <Link className="navbar-brand" to="/">
-          <img src="/assets/images/01.png" alt="Homepage" className="navbar-logo" />
-          Homepage
-        </Link>
+
+              <Link className="navbar-brand-2" to="/">
+                 <img src="/assets/images/01.png" alt="Homepage" className="navbar-logo" />
+                 Home
+              </Link>
             </Form>
+
+
             <Nav className="ms-auto nav-links">
               <Nav.Link as={Link} to="/recent-viewed" onClick={() => setExpanded(false)}>
                 Recent Viewed
               </Nav.Link>
+
+              <Nav.Link onClick={goToCart} className="cart-info">
+                Shopping Cart <Badge bg="primary">0</Badge>
+              </Nav.Link>
+              
+
               {user && (
                 <Nav.Link as={Link} to="/market-list" onClick={() => setExpanded(false)}>
                   Market List
                 </Nav.Link>
               )}
               {user ? (
-                <NavDropdown
-                  title={`Welcome, ${
-                    user?.username || user?.name || user?.email || 'User'
-                  }`}
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                </NavDropdown>
+                  <NavDropdown
+                    title={
+                      <span>
+                        <span className="nav-welcome-small">Welcome </span>
+                        <span className="nav-username-large">{user?.username || user?.name || user?.email || 'User'}</span>
+                      </span>
+                    }
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                  </NavDropdown>
               ) : (
                 <>
                   <Nav.Link as={Link} to="/register" onClick={() => setExpanded(false)}>
@@ -115,14 +128,12 @@ function Header() {
                   </Nav.Link>
                 </>
               )}
-              <Nav.Link onClick={goToCart} className="cart-info">
-                Shopping Cart <Badge bg="secondary">0</Badge>
-              </Nav.Link>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <LoginPopup show={showLoginModal} handleClose={handleCloseLogin} /> {/* Pass show state and close handler */}
+      <LoginPopup show={showLoginModal} handleClose={handleCloseLogin} /> 
     </>
   );
 }
