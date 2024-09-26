@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, Row, Col, Button, Image, Table, Form, InputGroup } from "react-bootstrap";
 import "./style/Cart.css";
 
 function Cart() {
@@ -9,11 +10,13 @@ function Cart() {
   const [totalItems, setTotalItems] = useState(0);
   const navigate = useNavigate();
 
+  // Fetch cart items from localStorage and calculate totals
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     consolidateCartItems(cart);
-  });
+  }, []);
 
+  // Consolidates duplicate cart items and updates state
   const consolidateCartItems = (cart) => {
     const consolidatedItems = cart.reduce((acc, item) => {
       const found = acc.find((x) => x.id === item.id);
@@ -23,15 +26,17 @@ function Cart() {
         acc.push({
           ...item,
           price: parseFloat(item.price),
-          quantity: parseInt(item.quantity, 10)
+          quantity: parseInt(item.quantity, 10),
         });
       }
       return acc;
     }, []);
+
     setCartItems(consolidatedItems);
     calculateTotal(consolidatedItems);
   };
 
+  // Calculates the total price, total items, and number of products
   const calculateTotal = (items) => {
     const totalAmount = items.reduce(
       (acc, item) => acc + item.price * item.quantity,
@@ -43,6 +48,23 @@ function Cart() {
     setTotalItems(totalCount);
   };
 
+  // Adjusts the quantity of items in the cart and recalculates totals
+  const adjustItemQuantity = (id, delta) => {
+    const newCart = cartItems
+      .map((item) => {
+        if (item.id === id) {
+          const newQuantity = item.quantity + delta;
+          return { ...item, quantity: Math.max(1, newQuantity) }; // Prevents negative or zero quantities
+        }
+        return item;
+      });
+
+    setCartItems(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    calculateTotal(newCart);
+  };
+
+  // Removes an item from the cart entirely
   const handleRemove = (id) => {
     const newCart = cartItems.filter((item) => item.id !== id);
     setCartItems(newCart);
@@ -50,25 +72,7 @@ function Cart() {
     calculateTotal(newCart);
   };
 
-  const adjustItemQuantity = (id, delta) => {
-    const newCart = cartItems
-      .map((item) => {
-        if (item.id === id) {
-          const newQuantity = item.quantity + delta;
-          return { 
-            ...item, 
-            quantity: Math.max(0, newQuantity),
-            price: parseFloat(item.price)
-          };
-        }
-        return item;
-      })
-      .filter((item) => item.quantity > 0);
-    setCartItems(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    calculateTotal(newCart);
-  };
-
+  // Navigates to payment if the user is authenticated, else prompts login
   const handleProceedToPayment = () => {
     const authTokens = localStorage.getItem("authTokens");
     if (!authTokens) {
@@ -79,53 +83,96 @@ function Cart() {
   };
 
   if (cartItems.length === 0) {
-    return <div>Your cart is empty</div>;
+    return <Container className="text-center mt-5">Your cart is empty</Container>;
   }
 
   return (
-    <div className="cart-container">
-      <div className="cart-items">
-        <h1>Your Shopping Cart</h1>
-        <div className="cart-header">
-          <span className="header-item">Product Name</span>
-          <span className="header-item">Price</span>
-          <span className="header-item">Quantity</span>
-          <span className="header-item">Subtotal</span>
-          <span className="header-item">Control</span>
-        </div>
-        {cartItems.map((item, index) => (
-          <div className="cart-item" key={index}>
-            <img src={item.image} alt={item.name} className="cart-item-image" />
-            <span className="cart-item-name">{item.name}</span>
-            <span className="cart-item-price">${item.price}</span>
-            <div className="cart-item-quantity">
-              <button onClick={() => adjustItemQuantity(item.id, -1)}>-</button>
-              <span>{item.quantity.toString().padStart(2, "0")}</span>
-              <button onClick={() => adjustItemQuantity(item.id, 1)}>+</button>
-            </div>
-            <span className="cart-item-subtotal">
-              ${(item.price * item.quantity).toFixed(2)}
-            </span>
-            <button
-              className="cart-item-remove"
-              onClick={() => handleRemove(item.id)}
+    <Container className="cart-container mt-5">
+      <h1>Your Shopping Cart</h1>
+      <Row>
+        <Col md={8}>
+          <Table bordered hover responsive className="narrow-table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <Image src={item.image} alt={item.name} thumbnail className="cart-item-image" />
+                    {item.name}
+                  </td>
+                  <td>${item.price.toFixed(2)}</td>
+                  <td>
+                    <InputGroup className="quantity-input-group">
+                      <Button
+                        variant="outline-secondary"
+                        onClick={() => adjustItemQuantity(item.id, -1)}
+                      >
+                        -
+                      </Button>
+                      <Form.Control
+                        type="number"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          adjustItemQuantity(item.id, parseInt(e.target.value) - item.quantity)
+                        }
+                        min="1"
+                        className="quantity-input"
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        onClick={() => adjustItemQuantity(item.id, 1)}
+                      >
+                        +
+                      </Button>
+                    </InputGroup>
+                  </td>
+                  <td>${(item.price * item.quantity).toFixed(2)}</td>
+                  <td>
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      onClick={() => handleRemove(item.id)}
+                    >
+                      Remove All
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+        <Col md={4}>
+          <div className="cart-summary">
+            <h2>Cart Summary</h2>
+            <p>
+              <strong>Total Products:</strong> {totalProducts}
+            </p>
+            <p>
+              <strong>Total Items:</strong> {totalItems}
+            </p>
+            <p>
+              <strong>Total Price:</strong> ${totalPrice}
+            </p>
+            <Button
+              onClick={handleProceedToPayment}
+              className="payment-button"
+              variant="success"
+              block
             >
-              Remove All
-            </button>
+              Proceed to Payment
+            </Button>
           </div>
-        ))}
-      </div>
-
-      <div className="cart-summary">
-        <h2>Cart Summary</h2>
-        <p>Total Products: {totalItems}</p>
-        <p>Total Items: {totalProducts}</p>
-        <p>Total Price: ${totalPrice}</p>
-        <button onClick={handleProceedToPayment} className="payment-button">
-          Proceed to Payment
-        </button>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
