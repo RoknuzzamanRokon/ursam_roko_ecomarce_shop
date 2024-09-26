@@ -82,6 +82,10 @@ function Header() {
               <Button variant="outline-success" type="submit">
                 Search
               </Button>
+              <Link className="navbar-brand" to="/">
+          <img src="/assets/images/01.png" alt="Homepage" className="navbar-logo" />
+          Homepage
+        </Link>
             </Form>
             <Nav className="ms-auto nav-links">
               <Nav.Link as={Link} to="/recent-viewed" onClick={() => setExpanded(false)}>

@@ -1,39 +1,51 @@
-/* Header.css */
-
 .header {
     background-color: #ffffff;
-  }
-  
-  .logo-image {
+    position: fixed; /* Fix the header at the top */
+    top: 0; /* Stick to the top of the viewport */
+    left: 0;
+    width: 100%; /* Make the header span the full width */
+    z-index: 1000; /* Ensure the header stays above other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Optional: Add a shadow for better separation from content */
+}
+
+.logo-image {
     height: 50px;
-  }
-  
-  .search-bar {
+}
+
+.search-bar {
     width: 300px;
-  }
-  
-  .nav-links .nav-link {
+}
+
+.nav-links .nav-link {
     margin-right: 15px;
-  }
-  
-  .cart-info {
+}
+
+.cart-info {
     display: flex;
     align-items: center;
-  }
-  
-  .cart-info .badge {
+}
+
+.cart-info .badge {
     margin-left: 5px;
-  }
-  
-  @media (max-width: 992px) {
+}
+
+@media (max-width: 992px) {
     .search-bar {
-      width: 100%;
-      margin-bottom: 10px;
+        width: 100%;
+        margin-bottom: 10px;
     }
-  
+
     .nav-links .nav-link {
-      margin-right: 0;
-      margin-bottom: 10px;
+        margin-right: 0;
+        margin-bottom: 10px;
     }
-  }
-  
+}
+
+.navbar-logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+body {
+    padding-top: 70px; 
+}

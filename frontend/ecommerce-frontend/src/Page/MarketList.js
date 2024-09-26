@@ -31,7 +31,7 @@ function MarketList() {
 
       {lastPayment && (
         <div className="last-payment">
-          <h2>Last Payment</h2>
+          <h2>Your Last Market and Payment Details</h2>
           <p>Date: {new Date(lastPayment.date).toLocaleDateString()}</p>
           <p>Total Amount: ${lastPayment.total_amount.toFixed(2)}</p>
           <p>Total Quantity: {lastPayment.total_items}</p>
