@@ -11,8 +11,8 @@ function Navbar() {
   };
 
   return (
-    <BootstrapNavbar bg="light" expand="lg" expanded={isMenuOpen} className="navbar">
-      <Container>
+    <BootstrapNavbar bg="light" expand="lg" expanded={isMenuOpen} className="navbar p-0">
+      <Container className="p-10">
         <Link className="navbar-brand" to="/">
           <img src="/assets/images/01.png" alt="Homepage" className="navbar-logo" />
           Homepage

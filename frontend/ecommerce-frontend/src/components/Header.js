@@ -56,7 +56,7 @@ function Header() {
   return (
     <>
       <Navbar bg="light" expand="lg" expanded={expanded} className="header">
-        <Container>
+        <Container fluid className="p-10">
           <Navbar.Brand as={Link} to="/">
             <img
               src="/assets/images/ursamRokoLogo.png"
