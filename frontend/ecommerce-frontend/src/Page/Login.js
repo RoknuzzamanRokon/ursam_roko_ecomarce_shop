@@ -1,94 +1,131 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
-import { AuthContext } from "../AuthContext";
-import { Link, useNavigate } from "react-router-dom";
-import { jwtDecode as jwtDecode } from "jwt-decode"; // Correct import for jwt-decode
-import "./style/Login.css";
+// import React, { useState, useContext, useEffect, useCallback } from "react";
+// import { AuthContext } from "../AuthContext";
+// import { Link, useNavigate } from "react-router-dom";
+// import { Form, Button, Container, Modal, Row, Col } from "react-bootstrap";
+// import {jwtDecode} from "jwt-decode";
+// import "./style/Login.css";
 
-// Input component for username and password
-const InputField = ({ label, type, value, onChange }) => {
-  return (
-    <div className="input-group">
-      <label>{label}:</label>
-      <input type={type} value={value} onChange={onChange} required />
-    </div>
-  );
-};
+// const InputField = ({ label, type, value, onChange }) => {
+//   return (
+//     <Form.Group className="mb-4">
+//       <Form.Label className="input-label">{label}</Form.Label>
+//       <Form.Control
+//         type={type}
+//         value={value}
+//         onChange={onChange}
+//         className="form-input"
+//         required
+//       />
+//     </Form.Group>
+//   );
+// };
 
-function Login() {
-  const { loginUser, googleLoginUser } = useContext(AuthContext);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+// function Login() {
+//   const { loginUser, googleLoginUser } = useContext(AuthContext);
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [showModal, setShowModal] = useState(false);
+//   const navigate = useNavigate();
 
-  // Use useCallback to memoize handleGoogleLoginSuccess
-  const handleGoogleLoginSuccess = useCallback(
-    (response) => {
-      const token = response.credential;
-      const userObject = jwtDecode(token);
-      googleLoginUser(userObject);
-      navigate("/");
-    },
-    [googleLoginUser, navigate]
-  ); // Added necessary dependencies
+//   const handleClose = () => setShowModal(false);
+//   const handleShow = () => setShowModal(true);
 
-  useEffect(() => {
-    window.google.accounts.id.initialize({
-      client_id: "YOUR_GOOGLE_CLIENT_ID",
-      callback: handleGoogleLoginSuccess,
-    });
+//   const handleGoogleLoginSuccess = useCallback(
+//     (response) => {
+//       const token = response.credential;
+//       const userObject = jwtDecode(token);
+//       googleLoginUser(userObject);
+//       navigate("/");
+//     },
+//     [googleLoginUser, navigate]
+//   );
 
-    window.google.accounts.id.renderButton(
-      document.getElementById("google-signin-button"),
-      {
-        theme: "outline",
-        size: "large",
-        type: "standard",
-        shape: "rectangular",
-        logo_alignment: "left",
-      }
-    );
-  }, [handleGoogleLoginSuccess]); // handleGoogleLoginSuccess is now stable because of useCallback
+//   useEffect(() => {
+//     if (showModal) {
+//       window.google.accounts.id.initialize({
+//         client_id: "YOUR_GOOGLE_CLIENT_ID",
+//         callback: handleGoogleLoginSuccess,
+//       });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const success = await loginUser(username, password);
-    if (success) {
-      navigate("/");
-    } else {
-      alert("Invalid credentials");
-    }
-  };
+//       window.google.accounts.id.renderButton(
+//         document.getElementById("google-signin-button"),
+//         {
+//           theme: "outline",
+//           size: "large",
+//           shape: "rectangular",
+//           logo_alignment: "left",
+//           width: "100%",
+//         }
+//       );
+//     }
+//   }, [handleGoogleLoginSuccess, showModal]);
 
-  return (
-    <div className="login-container">
-      <h2 className="login-title">Login</h2>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          label="Username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <InputField
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit" className="login-button">
-          Login
-        </button>
-      </form>
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const success = await loginUser(username, password);
+//     if (success) {
+//       navigate("/");
+//       handleClose();
+//     } else {
+//       alert("Invalid credentials");
+//     }
+//   };
 
-      <div className="divider">or</div>
+//   return (
+//     <>
+//       {/* Login button to trigger modal */}
+//       <Button variant="outline-primary" onClick={handleShow}>
+//         Login
+//       </Button>
 
-      <div id="google-signin-button" className="google-button"></div>
+//       {/* Modal for Login */}
+//       <Modal show={showModal} onHide={handleClose} centered>
+//         <Modal.Header closeButton>
+//           <Modal.Title className="text-center w-100">Login</Modal.Title>
+//         </Modal.Header>
+//         <Modal.Body>
+//           <Container className="login-container">
+//             <Row className="justify-content-center">
+//               <Col md={12}>
+//                 <h5 className="text-center mb-4">Login to Your Account</h5>
+//                 <Form onSubmit={handleSubmit}>
+//                   <InputField
+//                     label="Username"
+//                     type="text"
+//                     value={username}
+//                     onChange={(e) => setUsername(e.target.value)}
+//                   />
+//                   <InputField
+//                     label="Password"
+//                     type="password"
+//                     value={password}
+//                     onChange={(e) => setPassword(e.target.value)}
+//                   />
+//                   <Button
+//                     variant="primary"
+//                     type="submit"
+//                     className="login-button w-100"
+//                   >
+//                     Login
+//                   </Button>
+//                 </Form>
+//                 <div className="divider my-4 text-center">or</div>
+//                 <div id="google-signin-button" className="google-button"></div>
+//                 <div className="text-center mt-4">
+//                   <p>
+//                     New User?{" "}
+//                     <Link to="/register" className="register-link">
+//                       Register here
+//                     </Link>
+//                   </p>
+//                 </div>
+//               </Col>
+//             </Row>
+//           </Container>
+//         </Modal.Body>
+//       </Modal>
+//     </>
+//   );
+// }
 
-      <div>
-        I am new User. First <Link to="/register">Register</Link> here.
-      </div>
-    </div>
-  );
-}
-
-export default Login;
+// export default Login;

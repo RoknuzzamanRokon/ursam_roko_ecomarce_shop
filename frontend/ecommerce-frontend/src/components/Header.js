@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import LoginPopup from './LoginPopup';
 import { FaBars } from 'react-icons/fa'; // Import FaBars from react-icons/fa
 import './style/Header.css';
 
@@ -19,6 +20,9 @@ function Header() {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
+  
+  // State for the login modal
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -41,70 +45,81 @@ function Header() {
     setExpanded(false);
   };
 
+  const handleShowLogin = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleCloseLogin = () => {
+    setShowLoginModal(false);
+  };
+
   return (
-    <Navbar bg="light" expand="lg" expanded={expanded} className="header">
-      <Container>
-        <Navbar.Brand as={Link} to="/">
-          <img
-            src="/assets/images/ursamRokoLogo.png"
-            alt="UrsamRokoLogo"
-            className="logo-image"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          onClick={() => setExpanded(!expanded)}
-        >
-          <FaBars />
-        </Navbar.Toggle>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Form className="d-flex me-auto" onSubmit={handleSearchSubmit}>
-            <FormControl
-              type="search"
-              placeholder="Search in 1000+ products..."
-              className="me-2 search-bar"
-              value={searchTerm}
-              onChange={handleSearchChange}
+    <>
+      <Navbar bg="light" expand="lg" expanded={expanded} className="header">
+        <Container>
+          <Navbar.Brand as={Link} to="/">
+            <img
+              src="/assets/images/ursamRokoLogo.png"
+              alt="UrsamRokoLogo"
+              className="logo-image"
             />
-            <Button variant="outline-success" type="submit">
-              Search
-            </Button>
-          </Form>
-          <Nav className="ms-auto nav-links">
-            <Nav.Link as={Link} to="/recent-viewed" onClick={() => setExpanded(false)}>
-              Recent Viewed
-            </Nav.Link>
-            {user && (
-              <Nav.Link as={Link} to="/market-list" onClick={() => setExpanded(false)}>
-                Market List
+          </Navbar.Brand>
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={() => setExpanded(!expanded)}
+          >
+            <FaBars />
+          </Navbar.Toggle>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Form className="d-flex me-auto" onSubmit={handleSearchSubmit}>
+              <FormControl
+                type="search"
+                placeholder="Search in 1000+ products..."
+                className="me-2 search-bar"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <Button variant="outline-success" type="submit">
+                Search
+              </Button>
+            </Form>
+            <Nav className="ms-auto nav-links">
+              <Nav.Link as={Link} to="/recent-viewed" onClick={() => setExpanded(false)}>
+                Recent Viewed
               </Nav.Link>
-            )}
-            {user ? (
-              <NavDropdown
-                title={`Welcome, ${
-                  user?.username || user?.name || user?.email || 'User'
-                }`}
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-              </NavDropdown>
-            ) : (
-              <>
-                <Nav.Link as={Link} to="/register" onClick={() => setExpanded(false)}>
-                  Register
+              {user && (
+                <Nav.Link as={Link} to="/market-list" onClick={() => setExpanded(false)}>
+                  Market List
                 </Nav.Link>
-                <Nav.Link as={Link} to="/login" onClick={() => setExpanded(false)}>
-                  Login
-                </Nav.Link>
-              </>
-            )}
-            <Nav.Link onClick={goToCart} className="cart-info">
-              Shopping Cart <Badge bg="secondary">0</Badge>
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+              )}
+              {user ? (
+                <NavDropdown
+                  title={`Welcome, ${
+                    user?.username || user?.name || user?.email || 'User'
+                  }`}
+                  id="basic-nav-dropdown"
+                >
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <>
+                  <Nav.Link as={Link} to="/register" onClick={() => setExpanded(false)}>
+                    Register
+                  </Nav.Link>
+                  <Nav.Link onClick={handleShowLogin}>
+                    Login
+                  </Nav.Link>
+                </>
+              )}
+              <Nav.Link onClick={goToCart} className="cart-info">
+                Shopping Cart <Badge bg="secondary">0</Badge>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <LoginPopup show={showLoginModal} handleClose={handleCloseLogin} /> {/* Pass show state and close handler */}
+    </>
   );
 }
 
