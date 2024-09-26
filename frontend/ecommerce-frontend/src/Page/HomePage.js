@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import "./style/HomePage.css";
 
 function HomePage() {
@@ -13,26 +14,29 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="product-list">
-      <h1>Products</h1>
-      <div className="card-container">
+    <Container className="mt-5">
+      <h1 className="text-center">Products</h1>
+      <Row className="mt-4">
         {products.map((product) => (
-          <div className="product-card" key={product.id}>
-            <Link to={`/product/${product.id}/`}>
-              <img
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-              />
-              <div className="product-details">
-                <h2>{product.name}</h2>
-                <p>${product.price}</p>
-              </div>
-            </Link>
-          </div>
+          <Col md={4} lg={3} sm={6} xs={12} key={product.id} className="mb-4">
+            <Card className="h-100">
+              <Link to={`/product/${product.id}/`} className="product-link">
+                <Card.Img
+                  variant="top"
+                  src={product.image}
+                  alt={product.name}
+                  className="product-image"
+                />
+                <Card.Body>
+                  <Card.Title>{product.name}</Card.Title>
+                  <Card.Text>${product.price}</Card.Text>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
