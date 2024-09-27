@@ -16,17 +16,14 @@ function HomePage() {
     });
   }, []);
 
-  // Add product to cart
   const addToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const productToAdd = { ...product, quantity: 1 }; // Default quantity of 1 for HomePage
+    const productToAdd = { ...product, quantity: 1 };
     cart.push(productToAdd);
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    // Add the product ID to the addedProducts state
     setAddedProducts((prevAdded) => [...prevAdded, product.id]);
 
-    // Auto-revert "CART ADD" back to "Add to Cart" after 3 seconds
     setTimeout(() => {
       setAddedProducts((prevAdded) => prevAdded.filter((id) => id !== product.id));
     }, 3000); // 3 seconds delay before reverting
@@ -39,7 +36,7 @@ function HomePage() {
 
       <Row>
         {products.map((product) => (
-          <Col key={product.id} md={3} className="mb-4">
+          <Col key={product.id} md={2} className="mb-6 p-1">
             <div className="card-container">
               <Card
                 className="h-100"
@@ -61,14 +58,13 @@ function HomePage() {
                     className="mt-auto view-details-button"
                     as={Link}
                     to={`/product/${product.id}`}
-                    onClick={(e) => e.stopPropagation()} // Prevent card click event when clicking "View Details"
-                  >
+                    onClick={(e) => e.stopPropagation()} 
+                      >
                     View Details
                   </Button>
                 </Card.Body>
-                {/* Conditionally render "Add to Cart" or "CART ADD" */}
                 <div className="add-to-cart-overlay">
-                  {addedProducts.includes(product.id) ? "CART ADD" : "Add to Cart"}
+                  {addedProducts.includes(product.id) ? "Cart Added." : "Add to Cart"}
                 </div>
               </Card>
             </div>
