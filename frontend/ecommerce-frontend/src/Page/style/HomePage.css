@@ -1,0 +1,37 @@
+/* style/HomePage.css */
+
+/* Card container to hold card and overlay */
+.card-container {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .add-to-cart-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background */
+    color: white;
+    font-size: 20px; /* Bigger text */
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1;
+  }
+  
+  /* Show the overlay when the card is hovered */
+  .card-container:hover .add-to-cart-overlay {
+    opacity: 1;
+  }
+  
+  /* Ensure that the View Details button is above the overlay */
+  .card-container .view-details-button {
+    position: relative;
+    z-index: 2; /* Ensure the button is above the overlay */
+  }
+  

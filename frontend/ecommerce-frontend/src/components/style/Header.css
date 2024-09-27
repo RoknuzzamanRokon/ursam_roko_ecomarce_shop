@@ -24,7 +24,7 @@
 .form-control.search-bar {
     width: 250px; 
     height: 5px;
-    min-width: 200px; /* Prevent it from being too small */
+    min-width: 200px; 
     flex: 1;
     max-width: 500px; 
   }
@@ -41,7 +41,7 @@
   
 
 body {
-    padding-top: 90px; 
+    padding-top: 80px; 
 }
 
 .navbar-brand-2 {
