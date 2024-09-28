@@ -32,7 +32,7 @@ function HomePage() {
   return (
     <Container fluid className="p-10">
       <CategoriesPage />
-      <h1 className="text-center mt-5">All Products</h1>
+      <h1 className="text-center mt-0">All Products</h1>
 
       <Row>
         {products.map((product) => (
