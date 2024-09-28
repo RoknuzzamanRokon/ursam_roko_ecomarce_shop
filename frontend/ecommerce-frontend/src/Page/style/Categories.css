@@ -1,0 +1,104 @@
+  .categories-sidebar {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; /* Full height to match the carousel */
+    overflow-y: auto; /* Add scroll behavior if the content overflows */
+    scrollbar-width: thin; /* Firefox: make the scrollbar thinner */
+    scrollbar-color: #ccc #f8f9fa; /* Firefox: scrollbar track and thumb colors */
+  }
+  
+  
+  /* Category list styling */
+  .category-list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .category-list .list-group-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .category-list .category-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    object-fit: contain;
+  }
+  
+  .category-list .category-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    flex-grow: 1;
+  }
+  
+  .category-list .category-link:hover {
+    color: #0056b3;
+  }
+  
+  .carousel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; 
+    display: block;
+    border-radius: 0px;
+  }
+  
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.7); 
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .carousel-caption h3 {
+    color: #fff;
+    margin: 0;
+  }
+  
+  .carousel-caption p {
+    color: #ffffff;
+  }
+
+  .category-image-slider {
+    height: 300px;
+  }
+
+  
+  .categories-sidebar {
+    height: 300px;
+    border: 1px solid #b4b4b4;
+  }
+
+
+  @media (max-width: 768px) {
+    .row.mb-0 {
+      flex-direction: column;
+    }
+  
+    .categories-sidebar {
+      height: auto;
+      margin-bottom: 20px;
+    }
+  
+    .carousel-item img {
+      height: auto;
+      max-height: 300px;
+    }
+  }
+  
