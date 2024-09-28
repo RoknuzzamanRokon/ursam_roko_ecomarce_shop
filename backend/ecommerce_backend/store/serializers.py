@@ -25,10 +25,10 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProductSearchSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description', 'price', 'image']
+        fields = ['id', 'name', 'description', 'price', 'category', 'label', 'image', 'rating', 'numReviews', 'countInStock', 'createdAt']
 
 
 # class OrderSerializer(serializers.ModelSerializer):
