@@ -62,11 +62,11 @@ A fully responsive e-commerce website built using Django, MySQL, and React. User
 3. Run the project:
 
     ```bash
-    for backend    
+    ----------Backend-----------    
     cd backend/ecommerce_backend
     python manage.py runserver
 
-    for frontend
+    ----------Frontend------------
     cd frontend/ecommerce-frontend
     npm start
     ```
