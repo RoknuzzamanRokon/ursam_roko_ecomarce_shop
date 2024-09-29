@@ -21,6 +21,7 @@ from .serializers import MarketListSerializer, MarketListItemSerializer
 
 
 from .utils import get_braintree_gateway
+from rest_framework.views import APIView
 
 
 
@@ -128,6 +129,11 @@ class LastMarketListView(generics.RetrieveAPIView):
     
 
 
+class LabelChoicesView(APIView):
+    def get(self, request):
+        category = request.query_params.get('category', '')
+        choices = Product.LABEL_CHOICES.get(category, [])
+        return Response(choices)
 
 
 
@@ -155,3 +161,9 @@ def create_payment(request):
     else:
         client_token = gateway.client_token.generate()
         return JsonResponse({"client_token": client_token})    
+    
+
+
+
+
+

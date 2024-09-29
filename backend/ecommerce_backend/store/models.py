@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
-# Product model
+
 class Product(models.Model):
     CATEGORY_CHOICES = [
         ('Kachabajar', 'Kachabajar'),
@@ -15,7 +15,6 @@ class Product(models.Model):
         ('Personal Care', 'Personal Care'),
         ('Sauce & Pickles', 'Sauce & Pickles'),
     ]
-
     LABEL_CHOICES = {
         'Kachabajar': ['Fish', 'Vegetables', 'Meat', 'Rice', 'Spices & Mixes', 'Cooking Oil & Ghee', 'Eggs', 'Atta/Maida', 'Salt & Sugar', 'Daal/Chhola', 'Baking Needs', 'Shemai/Suji'],
         'Home Care': ['Cleaning Products', 'Tissue & Napkins'],
@@ -27,7 +26,6 @@ class Product(models.Model):
         'Personal Care': ['Bath & Body'],
         'Sauce & Pickles': ['Salad Dressings', 'Pickle', 'Honey', 'Jam & Jelly', 'Sauce', 'Spreads & Mayonnaise'],
     }
-
     name = models.CharField(max_length=100)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -52,7 +50,7 @@ class Product(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
-# Order model with a foreign key to User
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

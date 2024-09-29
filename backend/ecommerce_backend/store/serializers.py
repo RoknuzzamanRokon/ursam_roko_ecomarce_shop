@@ -20,15 +20,29 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     
 class ProductSerializer(serializers.ModelSerializer):
+    label_choices = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['id', 'name', 'description', 'price', 'category', 'label', 'image', 'rating', 'numReviews', 'countInStock', 'createdAt', 'label_choices']
 
+    def get_label_choices(self, obj):
+        return Product.LABEL_CHOICES.get(obj.category, [])
 
-class ProductSerializer(serializers.ModelSerializer):
+    def validate(self, data):
+        category = data.get('category')
+        label = data.get('label')
+        if category and label:
+            if label not in Product.LABEL_CHOICES.get(category, []):
+                raise serializers.ValidationError({'label': f'Invalid label for category {category}'})
+        return data
+
+class ProductSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description', 'price', 'category', 'label', 'image', 'rating', 'numReviews', 'countInStock', 'createdAt']
+        fields = ['id', 'name', 'description', 'price', 'image']
+
+
 
 
 # class OrderSerializer(serializers.ModelSerializer):
