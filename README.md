@@ -4,11 +4,26 @@ A fully responsive e-commerce website built using Django, MySQL, and React. User
 
 ## Screenshots
 
-![Home Page](./screenshots/home_page.png)
+![homePage](https://github.com/user-attachments/assets/e149d827-220f-4d88-b80e-3c7ccff6e997)
 *Home Page*
 
-![Product Page](./screenshots/product_page.png)
+![productList](https://github.com/user-attachments/assets/dc641dcb-5965-4d1d-9b69-9a1593e8688d)
 *Product Page*
+
+![productDetails](https://github.com/user-attachments/assets/73907df8-d0bb-438b-a0ea-ad4670e0e19b)
+*Product Details*
+
+![searchPage](https://github.com/user-attachments/assets/6f7e8dc4-c5dc-4127-9e02-2b68ced34345)
+*Product Search Page*
+
+![marketList](https://github.com/user-attachments/assets/30dccec5-a530-4c75-98ce-2134478da8bf)
+*Market List Page*
+
+![loginPagr](https://github.com/user-attachments/assets/a9b5a2aa-7dbb-4796-a6a2-efdf570f0d57)
+*Login Page*
+
+![registerPage](https://github.com/user-attachments/assets/1cde9de6-0dde-48bb-ae2d-5bef08319d21)
+*RegisterPage*
 
 ## Features
 
@@ -29,6 +44,7 @@ A fully responsive e-commerce website built using Django, MySQL, and React. User
 
 ## Installation
 
+#### NOTE:- Check the "Package.json" file first and see all dependencies." 
 1. Clone the repository:
     ```bash
     git clone https://github.com/RoknuzzamanRokon/ursam_roko_ecomarce_shop.git
@@ -54,6 +70,7 @@ A fully responsive e-commerce website built using Django, MySQL, and React. User
     cd frontend/ecommerce-frontend
     npm start
     ```
+
 
 ## Contributing
 
